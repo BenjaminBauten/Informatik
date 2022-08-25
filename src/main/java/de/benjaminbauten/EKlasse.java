@@ -106,5 +106,6 @@ public class EKlasse {
         stift1.bewegeUm(150);
         stift1.dreheUm(225);
         stift1.bewegeUm(212);
+        stift1.hoch();
     }
 }
