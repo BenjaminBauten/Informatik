@@ -13,7 +13,7 @@ public class Gui {
     public void mainframe(EKlasse programm) {
 
         JFrame frame = new JFrame();
-        frame.setSize(300, 150);
+        frame.setSize(800, 800);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,7 +58,7 @@ public class Gui {
         });
 
             zeichneHausButton.setBounds(0,0,100,50);
-        zeichneBaumButton.setBounds(0,0,100,50);
+        zeichneBaumButton.setBounds(500,500,100,50);
             frame.add(zeichneHausButton);
             frame.add(zeichneBaumButton);
         frame.setVisible(true);
