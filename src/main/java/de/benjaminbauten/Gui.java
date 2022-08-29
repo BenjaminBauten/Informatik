@@ -1,6 +1,7 @@
 package de.benjaminbauten;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class Gui {
@@ -12,8 +13,8 @@ public class Gui {
 
     public void mainframe(EKlasse programm) {
 
-        JFrame frame = new JFrame();
-        frame.setSize(800, 800);
+        JFrame frame = new JFrame("Benjamin");
+        frame.setSize(200, 150);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -32,7 +33,7 @@ public class Gui {
             dialog.add(r);
 
             int result = JOptionPane.showConfirmDialog(null, dialog, "Postion wählen", JOptionPane.OK_CANCEL_OPTION);
-            if (result == JOptionPane.OK_OPTION){
+            if (result == JOptionPane.OK_OPTION) {
                 programm.zeichneHaus(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()), Integer.parseInt(r.getText()));
             }
         });
@@ -57,16 +58,25 @@ public class Gui {
             }
         });
 
-            zeichneHausButton.setBounds(0,0,100,50);
-        zeichneBaumButton.setBounds(500,500,100,50);
-            frame.add(zeichneHausButton);
-            frame.add(zeichneBaumButton);
-        frame.setVisible(true);
+        JButton zeichneLandschaft = new JButton("Landschaft erzeugen");
 
-//            frame.getContentPane().add(zeichneHausButton);
-//            frame.getContentPane().add(zeichneBaumButton);
-//            frame.getContentPane().add(zeichneBaumButton);
-//        frame.setVisible(true);
+        zeichneLandschaft.addActionListener(e -> {
+            
+            programm.zeichneStern(300, 100, 0);
+            programm.zeichneStern(200, 200, 0);
+            programm.zeichneWeihnachtsbaum(150, 400, 45);
+            programm.zeichneHaus(300, 500, 0);
+
+
+        });
+
+        frame.setLocationRelativeTo(null);
+
+        frame.setLayout(new FlowLayout());
+        frame.getContentPane().add(zeichneHausButton);
+        frame.getContentPane().add(zeichneLandschaft);
+        frame.getContentPane().add(zeichneBaumButton);
+        frame.setVisible(true);
 
 
     }
