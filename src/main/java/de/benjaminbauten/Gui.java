@@ -1,5 +1,7 @@
 package de.benjaminbauten;
 
+import basis.Fenster;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -59,7 +61,6 @@ public class Gui {
         });
 
         JButton zeichneLandschaft = new JButton("Landschaft erzeugen");
-
         zeichneLandschaft.addActionListener(e -> {
             
             programm.zeichneStern(300, 100, 0);
@@ -70,12 +71,18 @@ public class Gui {
 
         });
 
+        JButton allesLoeschen = new JButton("alles Löschen");
+        allesLoeschen.addActionListener(e -> {
+            programm.resetAll();
+        });
+
         frame.setLocationRelativeTo(null);
 
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(zeichneHausButton);
-        frame.getContentPane().add(zeichneLandschaft);
         frame.getContentPane().add(zeichneBaumButton);
+        frame.getContentPane().add(zeichneLandschaft);
+        frame.getContentPane().add(allesLoeschen);
         frame.setVisible(true);
 
 

@@ -108,4 +108,8 @@ public class EKlasse {
         stift1.bewegeUm(212);
         stift1.hoch();
     }
+
+    public void resetAll() {
+        fenster1.loescheAlles();
+    }
 }
