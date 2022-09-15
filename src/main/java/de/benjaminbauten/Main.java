@@ -5,10 +5,14 @@ public class Main {
 
         //EKlasse programm = new EKlasse(750,500);
         //BilderGalerie bilderGalerie = new BilderGalerie(500,500);
-        DaumenkinoKlasse daumenkinoKlasse = new DaumenkinoKlasse(300,350, 200, 250, 50);
+        //DaumenkinoKlasse daumenkinoKlasse = new DaumenkinoKlasse(300,350, 200, 250, 50);
         //Gui gui = new Gui(programm);
         //bilderGalerie.zeichneAlles();
-        daumenkinoKlasse.fuehreAusKino();
+        //daumenkinoKlasse.fuehreAusKino();
+        //gallopierendesPferd Pferd = new gallopierendesPferd();
+
+        Ballwurf ballwurf = new Ballwurf();
+
     }
 
 }
