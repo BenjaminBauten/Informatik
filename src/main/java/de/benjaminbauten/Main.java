@@ -1,5 +1,7 @@
 package de.benjaminbauten;
 
+import de.benjaminbauten.Bilder.Paint;
+
 public class Main {
     public static void main(String[] s) {
 
@@ -11,8 +13,10 @@ public class Main {
         //daumenkinoKlasse.fuehreAusKino();
         //gallopierendesPferd Pferd = new gallopierendesPferd();
 
-        Ballwurf ballwurf = new Ballwurf();
+        //Ballwurf ballwurf = new Ballwurf();
 
+        //Paint
+        Paint paint = new Paint().addMouseListener();
     }
 
 }
