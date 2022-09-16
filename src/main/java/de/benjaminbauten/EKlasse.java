@@ -14,6 +14,8 @@ public class EKlasse {
         // Instanzvariable initialisieren
         fenster1 = new Fenster(breite, hoehe);
         stift1 = new IgelStift();
+        Gui gui = new Gui(this);
+
     }
 
     public void zeichneWeihnachtsbaum(int x, int y, int rotation) {

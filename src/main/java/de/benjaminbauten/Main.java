@@ -1,22 +1,30 @@
 package de.benjaminbauten;
 
-import de.benjaminbauten.Bilder.Paint;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] s) {
+    public static void main(String[] s) throws IOException {
 
+        //Zeichen-Klasse
         //EKlasse programm = new EKlasse(750,500);
-        //BilderGalerie bilderGalerie = new BilderGalerie(500,500);
-        //DaumenkinoKlasse daumenkinoKlasse = new DaumenkinoKlasse(300,350, 200, 250, 50);
-        //Gui gui = new Gui(programm);
-        //bilderGalerie.zeichneAlles();
-        //daumenkinoKlasse.fuehreAusKino();
-        //gallopierendesPferd Pferd = new gallopierendesPferd();
 
+        //BilderGalerie
+        //BilderGalerie bilderGalerie = new BilderGalerie(500,500);
+
+        //bilderGalerie.zeichneAlles();
+
+        //Daumenkino
+        //DaumenkinoKlasse daumenkinoKlasse = new DaumenkinoKlasse();
+        //daumenkinoKlasse.fuehreAusKino();
+
+        //Erster Film
+        //GallopierendesPferd Pferd = new GallopierendesPferd();
+
+        //Ballwurf
         //Ballwurf ballwurf = new Ballwurf();
 
         //Paint
-        Paint paint = new Paint().addMouseListener();
+        Paint paint = new Paint();
     }
 
 }

@@ -1,8 +1,10 @@
 package de.benjaminbauten;
 
-import basis.*;
+import basis.Bild;
+import basis.Fenster;
+import basis.Hilfe;
+import basis.Stift;
 
-import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 
 public class DaumenkinoKlasse {
@@ -12,11 +14,15 @@ public class DaumenkinoKlasse {
 
     private Bild bild1, bild2, bild3, bild4;
 
-    public DaumenkinoKlasse(int width, int height, int bildWidth, int bildHeight, int border){
-        fensterDaumenkino = new Fenster(width, height);
+    public DaumenkinoKlasse() {
+        fensterDaumenkino = new Fenster(300, 350);
         fensterDaumenkino.setzeHintergrundFarbe(Color.GRAY);
         stift1 = new Stift();
         stift1.setzeLinienBreite(2);
+
+        int bildWidth = 200;
+        int bildHeight = 250;
+        int border = 50;
 
         bild1 = new Bild(border, border, bildWidth, bildHeight);
         bild2 = new Bild(border, border, bildWidth, bildHeight);
@@ -29,8 +35,7 @@ public class DaumenkinoKlasse {
 
     }
 
-    public void fuehreAusKino(){
-        System.out.println("Mehode fuehreAusKino ausgeführt.");
+    public void fuehreAusKino() {
         bild1.setzeSichtbar(true);
         bild2.setzeSichtbar(false);
         bild3.setzeSichtbar(false);
@@ -46,7 +51,8 @@ public class DaumenkinoKlasse {
         stift1.maleAuf(bild4);
         zeichneP4();
 
-        while (true){
+
+        while (true) {
             bild1.setzeSichtbar(true);
             Hilfe.pause(250);
             bild1.setzeSichtbar(false);
@@ -56,16 +62,14 @@ public class DaumenkinoKlasse {
             bild3.setzeSichtbar(true);
             Hilfe.pause(250);
             bild3.setzeSichtbar(false);
-//            bild4.setzeSichtbar(true);
-//            Hilfe.pause(500);
-//            bild4.setzeSichtbar(false);
 
         }
+
     }
 
-    public void zeichneP1(){
+    public void zeichneP1() {
         stift1.hoch();
-        stift1.bewegeBis(100,50);
+        stift1.bewegeBis(100, 50);
         stift1.runter();
         stift1.zeichneKreis(20);
         stift1.dreheBis(270);
@@ -88,9 +92,9 @@ public class DaumenkinoKlasse {
         stift1.bewegeUm(50);
     }
 
-    public void zeichneP2(){
+    public void zeichneP2() {
         stift1.hoch();
-        stift1.bewegeBis(100,50);
+        stift1.bewegeBis(100, 50);
         stift1.runter();
         stift1.zeichneKreis(20);
         stift1.dreheBis(270);
@@ -113,9 +117,9 @@ public class DaumenkinoKlasse {
         stift1.bewegeUm(50);
     }
 
-    public void zeichneP3(){
+    public void zeichneP3() {
         stift1.hoch();
-        stift1.bewegeBis(100,50);
+        stift1.bewegeBis(100, 50);
         stift1.runter();
         stift1.zeichneKreis(20);
         stift1.dreheBis(270);
@@ -138,9 +142,9 @@ public class DaumenkinoKlasse {
         stift1.bewegeUm(50);
     }
 
-    public void zeichneP4(){
+    public void zeichneP4() {
         stift1.hoch();
-        stift1.bewegeBis(100,50);
+        stift1.bewegeBis(100, 50);
         stift1.runter();
         stift1.zeichneKreis(20);
         stift1.dreheBis(270);

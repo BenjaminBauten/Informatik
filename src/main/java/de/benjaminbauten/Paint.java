@@ -1,4 +1,4 @@
-package de.benjaminbauten.Bilder;
+package de.benjaminbauten;
 
 import basis.Fenster;
 import basis.MausLauscherStandard;
@@ -6,21 +6,27 @@ import basis.Stift;
 
 public class Paint extends Fenster {
 
-    Stift stift;
+    public Stift stift;
+    private MausLauscherStandard mausLauscherStandard;
 
     public Paint() {
         this.setzeGroesse(500, 500);
         this.setzeTitel("Benjamin-Paint");
 
         stift = new Stift();
+        new PaintGui(this);
+
     }
 
-    public Paint addMouseListener() {
-        this.setzeMausLauscherStandard(this.getMouseListener());
-        return this;
+    public void addMouseListener() {
+        mausLauscherStandard = this.getMouseListener();
+        this.setzeMausLauscherStandard(mausLauscherStandard);
+    }
+    public void removeMouseListener(){
+        this.entferneMausLauscherStandard(this.mausLauscherStandard);
     }
 
-    public MausLauscherStandard getMouseListener() {
+    private MausLauscherStandard getMouseListener() {
         return new MausLauscherStandard() {
             @Override
             public void bearbeiteMausDruck(Object o, int i, int i1) {
@@ -53,6 +59,7 @@ public class Paint extends Fenster {
             }
         };
     }
+
 
 
 }
