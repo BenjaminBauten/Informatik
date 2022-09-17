@@ -24,7 +24,7 @@ public class Main {
         //Ballwurf ballwurf = new Ballwurf();
 
         //Paint
-        Paint paint = new Paint();
+        new Paint();
     }
 
 }
