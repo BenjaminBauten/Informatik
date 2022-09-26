@@ -4,6 +4,8 @@ import basis.Fenster;
 import basis.MausLauscherStandard;
 import basis.Stift;
 
+import java.awt.*;
+
 public class Paint extends Fenster {
 
     public Stift stift;
