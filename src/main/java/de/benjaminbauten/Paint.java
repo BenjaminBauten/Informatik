@@ -11,28 +11,29 @@ public class Paint extends Fenster {
     public Stift stift;
     private MausLauscherStandard mausLauscherStandard;
 
+    private final PaintGui paintGui;
+
     public Paint() {
         this.setzeGroesse(500, 500);
         this.setzeTitel("Benjamin-Paint");
 
         stift = new Stift();
-        new PaintGui(this);
+        paintGui = new PaintGui(this);
 
     }
 
-    public void addMouseListener() {
-        mausLauscherStandard = this.getMouseListener();
-        this.setzeMausLauscherStandard(mausLauscherStandard);
-    }
-    public void removeMouseListener(){
-        this.entferneMausLauscherStandard(this.mausLauscherStandard);
-    }
-
-    private MausLauscherStandard getMouseListener() {
-        return new MausLauscherStandard() {
+    public void addMouseListener(String s) {
+        mausLauscherStandard = new MausLauscherStandard() {
             @Override
             public void bearbeiteMausDruck(Object o, int i, int i1) {
-                stift.runter();
+                if (s.equals("crawlMouseClick")) {
+                    paintGui.crawlMouseClick(i,i1);
+                    return;
+                }
+                if (s.equals("Zeichenmodus")){
+                    stift.runter();
+                }
+
             }
 
             @Override
@@ -42,7 +43,9 @@ public class Paint extends Fenster {
 
             @Override
             public void bearbeiteMausLos(Object o, int i, int i1) {
-                stift.hoch();
+                if (s.equals("Zeichenmodus")) {
+                    stift.hoch();
+                }
             }
 
             @Override
@@ -60,8 +63,12 @@ public class Paint extends Fenster {
 
             }
         };
+        this.setzeMausLauscherStandard(mausLauscherStandard);
     }
 
+    public void removeMouseListener() {
+        this.entferneMausLauscherStandard(this.mausLauscherStandard);
+    }
 
 
 }

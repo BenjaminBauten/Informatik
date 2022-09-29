@@ -3,15 +3,18 @@ package de.benjaminbauten;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
+import basis.*;
 
 public class PaintGui extends JFrame {
 
     private final Paint instance;
+    private final Zeichenmethoden zeichenmethoden;
     String[] farbenListe = {"Schwarz", "Rot", "Gelb", "Grün", "Blau"};
 
     public PaintGui(Paint instance) {
         this.createWindow();
         this.instance = instance;
+        zeichenmethoden = new Zeichenmethoden();
     }
 
     public void createWindow() {
@@ -25,6 +28,52 @@ public class PaintGui extends JFrame {
         //Operation beim Schließen
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+
+        //Knöpfe
+            JToggleButton baumZeichnen = new JToggleButton("Baum plazieren");
+            baumZeichnen.addActionListener(e -> {
+                if(baumZeichnen.isSelected()){
+                    instance.removeMouseListener();
+                    instance.addMouseListener("crawlMouseClick");
+                    baumZeichnen.setText("Modus Beenden");
+                }
+                if (!baumZeichnen.isSelected()){
+                    instance.removeMouseListener();
+                    baumZeichnen.setText("Baum plazieren");
+                    instance.addMouseListener("Zeichenmodus");
+                }
+            });
+            this.getContentPane().add(baumZeichnen);
+
+        JToggleButton hausZeichnen = new JToggleButton("Haus plazieren");
+        baumZeichnen.addActionListener(e -> {
+            if(hausZeichnen.isSelected()){
+                instance.removeMouseListener();
+                instance.addMouseListener("crawlMouseClick");
+                hausZeichnen.setText("Modus Beenden");
+            }
+            if (!hausZeichnen.isSelected()){
+                instance.removeMouseListener();
+                hausZeichnen.setText("Baum plazieren");
+                instance.addMouseListener("Zeichenmodus");
+            }
+        });
+        this.getContentPane().add(hausZeichnen);
+
+        JToggleButton sternZeichnen = new JToggleButton("Stern plazieren");
+        baumZeichnen.addActionListener(e -> {
+            if(sternZeichnen.isSelected()){
+                instance.removeMouseListener();
+                instance.addMouseListener("crawlMouseClick");
+                sternZeichnen.setText("Modus Beenden");
+            }
+            if (!sternZeichnen.isSelected()){
+                instance.removeMouseListener();
+                sternZeichnen.setText("Baum plazieren");
+                instance.addMouseListener("Zeichenmodus");
+            }
+        });
+        this.getContentPane().add(sternZeichnen);
 
         //Auswahlfeld
         JComboBox farbeWaehlen = new JComboBox(farbenListe);
@@ -47,7 +96,6 @@ public class PaintGui extends JFrame {
         });
         this.getContentPane().add(farbeWaehlen);
 
-        //Knöpfe
         String[] verschiedeneBreiten = {"dünn", "normal", "dick"};
         JComboBox<String> selectWidth = new JComboBox<>(verschiedeneBreiten);
         selectWidth.addActionListener(e -> {
@@ -87,7 +135,7 @@ public class PaintGui extends JFrame {
         zeichenToggle.addActionListener(e -> {
 
             if (zeichenToggle.isSelected()) {
-                instance.addMouseListener();
+                instance.addMouseListener("Zeichenmodus");
                 zeichenToggle.setText("Zeichenmodus deaktivieren");
                 aktiviereRadirgummi.setVisible(true);
                 return;
@@ -108,6 +156,10 @@ public class PaintGui extends JFrame {
         aktiviereRadirgummi.setVisible(false);
 
 
+    }
+
+    public void crawlMouseClick(int x, int y) {
+        zeichenmethoden.zeichneWeihnachtsbaum(x,y,0);
     }
 
 }
