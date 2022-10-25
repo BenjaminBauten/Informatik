@@ -1,5 +1,7 @@
 package de.benjaminbauten;
 
+import basis.Hilfe;
+
 import java.io.IOException;
 
 public class Main {
@@ -24,7 +26,14 @@ public class Main {
         //Ballwurf ballwurf = new Ballwurf();
 
         //Paint
-        new Paint();
+        //new Paint();
+
+        //KlassikPaint
+        //new PaintClassic(500, 500);
+        //System.out.println("Hilfe");
+
+        //Zahlenraten
+        new Zahlenraten();
     }
 
 }

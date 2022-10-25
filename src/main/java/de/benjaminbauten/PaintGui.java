@@ -154,8 +154,6 @@ public class PaintGui extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         aktiviereRadirgummi.setVisible(false);
-
-
     }
 
     public void crawlMouseClick(int x, int y) {
