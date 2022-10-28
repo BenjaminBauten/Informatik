@@ -33,7 +33,10 @@ public class Main {
         //System.out.println("Hilfe");
 
         //Zahlenraten
-        new Zahlenraten();
+        //new Zahlenraten();
+
+        //Taschenrechner
+        new Taschenrechner();
     }
 
 }
