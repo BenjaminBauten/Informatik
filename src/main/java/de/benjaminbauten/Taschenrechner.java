@@ -2,12 +2,23 @@ package de.benjaminbauten;
 
 import basis.*;
 
+import java.util.Arrays;
+
 public class Taschenrechner {
+
     private Fenster fenster;
+    private Tastatur tastatur;
     private Knopf k0,k1, k2, k3, k4, k5, k6, k7, k8, k9, kGeteilt, kMal, kMinus, kPlus, kGleich, kKomma, ende;
     private int breite, hoehe, startx, starty;
+
+    Character[] zeichen1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+    Character[] zeichen2 = {'+', '-', '*', '/'};
     TextFeld ausgabe;
     BeschriftungsFeld titel;
+
+    private String ausgabetext;
+    private double lezteZahl;
+    private char letztesZeichen = '+';
 
     public Taschenrechner(){
         //Tastenbereich
@@ -38,7 +49,55 @@ public class Taschenrechner {
         ende = new Knopf("Ende", startx, starty + hoehe*4 + 20, breite*4, 30);
         titel = new BeschriftungsFeld("Taschenrechner", startx, 20, breite*4, hoehe);
         titel.setzeSchriftGroesse(20);
+        tastatur = new Tastatur();
+        ausgabetext = "";
+
+        //Start des Programmes
+        this.fuehreAus();
     }
 
+    public void fuehreAus(){
+        while (!ende.wurdeGedrueckt()) {
 
+            if(kGleich.wurdeGedrueckt()){
+                operatoren();
+                ausgabetext = Double.toString(lezteZahl);
+                System.out.println(lezteZahl);
+                ausgabe.setzeText(ausgabetext);
+            }
+
+            if (tastatur.wurdeGedrueckt()) {
+                tastatur.holeZeichen();
+
+                if(Arrays.asList(zeichen1).contains(tastatur.aktuellesZeichen())){
+                    ausgabetext = ausgabetext + tastatur.aktuellesZeichen();
+                    ausgabe.setzeText(ausgabetext);
+                }
+
+                if(Arrays.asList(zeichen2).contains(tastatur.aktuellesZeichen())){
+                    this.operatoren();
+                }
+
+                System.out.println(ausgabetext);
+                ausgabe.setzeText(ausgabetext);
+            }
+        }
+        fenster.gibFrei();
+    }
+
+    public void operatoren(){
+        switch (letztesZeichen){
+            case '+': lezteZahl = lezteZahl + Double.parseDouble(ausgabetext);
+            break;
+            case '-': lezteZahl = lezteZahl - Double.parseDouble(ausgabetext);
+                break;
+            case '*': lezteZahl = lezteZahl * Double.parseDouble(ausgabetext);
+                break;
+            case '/': lezteZahl = lezteZahl / Double.parseDouble(ausgabetext);
+                break;
+        }
+        ausgabetext = "";
+        ausgabe.setzeText("");
+        letztesZeichen = tastatur.aktuellesZeichen();
+    }
 }
