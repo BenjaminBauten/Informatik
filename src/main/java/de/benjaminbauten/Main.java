@@ -37,6 +37,7 @@ public class Main {
 
         //Taschenrechner
         new Taschenrechner();
+        //new TaschenrechnerV2();
     }
 
 }
