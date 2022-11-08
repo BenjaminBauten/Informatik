@@ -1,6 +1,6 @@
 package de.benjaminbauten;
 
-import basis.Hilfe;
+import de.benjaminbauten.calculator.Calculator;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class Main {
         //new Zahlenraten();
 
         //Taschenrechner
-        new Taschenrechner();
+        new Calculator();
         //new TaschenrechnerV2();
     }
 
