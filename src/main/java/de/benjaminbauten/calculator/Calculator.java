@@ -46,30 +46,25 @@ public class Calculator {
 
         for (int i = 0; i < 6; i++) {
             operator[i] = new Knopf();
+            operator[i].setzeGroesse(breite, hoehe);
         }
 
         operator[0].setzePosition(startx + 3 * breite, starty);
-        operator[0].setzeGroesse(breite, hoehe);
         operator[0].setzeText(String.valueOf(OperatorEnum.DIVIDE.character));
 
         operator[1].setzePosition(startx + 3 * breite, starty + hoehe);
-        operator[1].setzeGroesse(breite, hoehe);
         operator[1].setzeText(String.valueOf(OperatorEnum.MULTIPLY.character));
 
         operator[2].setzePosition(startx + 3 * breite, starty + 2 * hoehe);
-        operator[2].setzeGroesse(breite, hoehe);
         operator[2].setzeText(String.valueOf(OperatorEnum.MINUS.character));
 
         operator[3].setzePosition(startx + 3 * breite, starty + 3 * hoehe);
-        operator[3].setzeGroesse(breite, hoehe);
         operator[3].setzeText(String.valueOf(OperatorEnum.PLUS.character));
 
-        operator[4].setzePosition(startx + 1 * breite, starty + 3 * hoehe);
-        operator[4].setzeGroesse(breite, hoehe);
+        operator[4].setzePosition(startx + breite, starty + 3 * hoehe);
         operator[4].setzeText(String.valueOf(OperatorEnum.Comma.character));
 
         operator[5].setzePosition(startx + 2 * breite, starty + 3 * hoehe);
-        operator[5].setzeGroesse(breite, hoehe);
         operator[5].setzeText(String.valueOf(OperatorEnum.Equals.character));
 
         //Komponeneten
@@ -90,12 +85,7 @@ public class Calculator {
     public void fuehreAus() {
 
         //Reset-Button
-        resetButton.setzeKnopfLauscher(new KnopfLauscher() {
-            @Override
-            public void bearbeiteKnopfDruck(Knopf knopf) {
-                clearDisplay();
-            }
-        });
+        resetButton.setzeKnopfLauscher(knopf -> clearDisplay());
 
         //Numpad-Buttons
         for (int i = 0; i < 10; i++) {
@@ -106,7 +96,7 @@ public class Calculator {
                     canInputSecondNumber = false;
                 }
                 if (nextIsComma) {
-                    result = String.valueOf(Double.parseDouble(result) + finalI / 10.0);
+                    result = String.valueOf(Double.parseDouble(result) + (finalI / 10.0));
                     refreshDisplay();
                     nextIsComma = false;
                     return;
