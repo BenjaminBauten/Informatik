@@ -2,10 +2,18 @@ package de.benjaminbauten.calculator;
 
 import basis.*;
 
+import javax.swing.*;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 
 public class Calculator {
 
     private final Knopf resetButton;
+
+    int rundenAuf = 2;
+
+    private final Knopf polyRootsButton;
     Knopf[] numpad = new Knopf[10];
     Knopf[] operator = new Knopf[6];
     TextFeld display;
@@ -17,7 +25,7 @@ public class Calculator {
     boolean pressedEquals = false;
     boolean nextIsComma = false;
     public Calculator() {
-        Fenster fenster = new Fenster("Taschenrechner", 300, 450);
+        new Fenster("Taschenrechner", 300, 500);
 
         //Tastenbereich
         int startx = 50;
@@ -70,6 +78,7 @@ public class Calculator {
         //Komponeneten
         display = new TextFeld(startx, starty - 50, breite * 4, 40);
         resetButton = new Knopf("Reset", startx, starty + hoehe * 4 + 20, breite * 4, 30);
+        polyRootsButton = new Knopf("Quadratische-Gleichungen", startx, starty + hoehe * 5 + 20, breite * 4, 30);
         titel = new BeschriftungsFeld("Taschenrechner", startx, 20, breite * 4, hoehe);
         titel.setzeSchriftGroesse(20);
 
@@ -112,18 +121,10 @@ public class Calculator {
             operator[i].setzeKnopfLauscher(knopf -> {
                 if (finalI < 4) {
                     switch (operator[finalI].text()) {
-                        case "/":
-                            operatorEnum = OperatorEnum.DIVIDE;
-                            break;
-                        case "x":
-                            operatorEnum = OperatorEnum.MULTIPLY;
-                            break;
-                        case "-":
-                            operatorEnum = OperatorEnum.MINUS;
-                            break;
-                        case "+":
-                            operatorEnum = OperatorEnum.PLUS;
-                            break;
+                        case "/" -> operatorEnum = OperatorEnum.DIVIDE;
+                        case "x" -> operatorEnum = OperatorEnum.MULTIPLY;
+                        case "-" -> operatorEnum = OperatorEnum.MINUS;
+                        case "+" -> operatorEnum = OperatorEnum.PLUS;
                     }
                     operatorSetup();
                 } else {
@@ -144,22 +145,50 @@ public class Calculator {
 
 
                 switch (operatorEnum) {
-                    case PLUS:
-                        result = String.valueOf(firstNumber + secondNumber);
-                        break;
-                    case MINUS:
-                        result = String.valueOf(firstNumber - secondNumber);
-                        break;
-                    case MULTIPLY:
-                        result = String.valueOf(firstNumber * secondNumber);
-                        break;
-                    case DIVIDE:
-                        result = String.valueOf(firstNumber / secondNumber);
-                        break;
-
+                    case PLUS -> result = String.valueOf(firstNumber + secondNumber);
+                    case MINUS -> result = String.valueOf(firstNumber - secondNumber);
+                    case MULTIPLY -> result = String.valueOf(firstNumber * secondNumber);
+                    case DIVIDE -> result = String.valueOf(firstNumber / secondNumber);
                 }
                 refreshDisplay();
                 pressedEquals = true;
+            }
+
+        });
+
+        polyRootsButton.setzeKnopfLauscher(knopf -> {
+
+            JPanel panel = new JPanel();
+            JLabel aLabel = new JLabel("x^2: ");
+            JTextField a = new JTextField(5);
+            JLabel bLabel = new JLabel("x: ");
+            JTextField b = new JTextField(5);
+            JLabel cLabel = new JLabel("y: ");
+            JTextField c = new JTextField(5);
+            panel.add(aLabel);
+            panel.add(a);
+            panel.add(bLabel);
+            panel.add(b);
+            panel.add(cLabel);
+            panel.add(c);
+
+            int result = JOptionPane.showConfirmDialog(null, panel, "Gleichung eingeben", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+
+                double aDouble = Double.parseDouble(a.getText());
+                double bDouble = Double.parseDouble(b.getText());
+                double cDouble = Double.parseDouble(c.getText());
+
+                final double sqrt = Math.sqrt(Math.pow(bDouble, 2) - 4 * aDouble * cDouble);
+                double x1 = (-bDouble + sqrt) / (2 * aDouble);
+                double x2 = (-bDouble - sqrt) / (2 * aDouble);
+
+                String xS1 = gerundeteAusgabe(x1);
+                String xS2 = gerundeteAusgabe(x2);
+
+
+                JOptionPane.showMessageDialog(null, "Die Lösungen sind: \nx1 = " + xS1 + "\nx2 = " + xS2);
+
             }
 
         });
@@ -195,5 +224,15 @@ public class Calculator {
         canInputSecondNumber = true;
         pressedEquals = false;
 
+    }
+
+    public String gerundeteAusgabe(double wert) {
+        StringBuilder sb = new StringBuilder(",##0.");
+        for (int i=0; i< rundenAuf; i++)
+            sb.append("0");
+        DecimalFormat df = new DecimalFormat(sb.toString());
+        df.setRoundingMode(RoundingMode.HALF_UP);
+
+        return df.format(wert);
     }
 }
