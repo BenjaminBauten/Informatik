@@ -122,7 +122,7 @@ public class Calculator {
                 if (finalI < 4) {
                     switch (operator[finalI].text()) {
                         case "/" -> operatorEnum = OperatorEnum.DIVIDE;
-                        case "x" -> operatorEnum = OperatorEnum.MULTIPLY;
+                        case "*" -> operatorEnum = OperatorEnum.MULTIPLY;
                         case "-" -> operatorEnum = OperatorEnum.MINUS;
                         case "+" -> operatorEnum = OperatorEnum.PLUS;
                     }
