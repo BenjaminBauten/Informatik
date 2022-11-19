@@ -36,8 +36,11 @@ public class Main {
         //new Zahlenraten();
 
         //Taschenrechner
-        new Calculator();
+        //new Calculator();
         //new TaschenrechnerV2();
+
+        //Würfelspiel
+        new Wuerfelspiel();
     }
 
 }

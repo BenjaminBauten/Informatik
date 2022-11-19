@@ -88,7 +88,7 @@ public class Calculator {
     }
 
     public static void main(String[] args) {
-        new Calculator();
+        //new Calculator();
     }
 
     public void fuehreAus() {

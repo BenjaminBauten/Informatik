@@ -21,6 +21,7 @@ public class Zahlenraten {
         bewertung1 = new TextFeld(20, 230, 100, 20);
         neu = new Knopf("Neu", 60, 300, 60, 30);
         ende = new Knopf("Ende", 150, 300, 60, 30);
+        //ende.setzeKnopfLauscher(knopf -> fenster.gibFrei());
         tippen = new Knopf("Tippen", 60, 140, 90, 30);
         spielbeschreibung = new BeschriftungsFeld("Es wird eine zufällige Zahl zwischen 1 und 99 ausgewählt.", 20, 50, 400, 20);
 
@@ -66,6 +67,7 @@ public class Zahlenraten {
             //zufallszahl = Hilfe.zufall(1,99);
             //zufallszahl = Hilfe.zufall(1,99);
         } else if(zufallszahl > gedachteZahl) {
+
             if ((Hilfe.betrag(zufallszahl - gedachteZahl) < 5)) {
                 bewertung1.setzeText("heiß");
             } else if ((Hilfe.betrag(zufallszahl - gedachteZahl) < 10)) {
