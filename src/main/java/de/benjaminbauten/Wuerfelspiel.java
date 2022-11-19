@@ -9,6 +9,8 @@ public class Wuerfelspiel {
         private BeschriftungsFeld b1, b2, b3, b4, b5, b6, b7, b8, b9, b10;
         private Knopf spielerWechseln, neuesSpiel, wuerfeln;
 
+        private boolean spieler1, spieler2;
+
         private int gewuerfelteZahl1, gewuerfelteZahl2, gewuerfelteZahl3, gewuerfelteZahl4, gewuerfelteZahl5, gewuerfelteZahl6;
 
         private int punktzahlSpieler1, punktzahlSpieler2;
@@ -33,35 +35,55 @@ public class Wuerfelspiel {
                 spielerWechseln = new Knopf("Spieler wechseln", 20, 220, 140, 40);
                 neuesSpiel = new Knopf("neues Spiel", 200, 220, 140, 40);
 
+                spieler1 = true;
+
                 //Buttons
-                wuerfeln.setzeKnopfLauscher(knopf -> this.spieler1());
+                wuerfeln.setzeKnopfLauscher(knopf -> {
+                        if (spieler1){
+                                this.spieler1();
+                        } else if(spieler2){
+                                this.spieler2();
+                        }
+                } );
+
+                spielerWechseln.setzeKnopfLauscher(knopf -> this.setSpielerWechseln());
 
         }
 
         public void spieler1(){
                 this.wuerfelMethode(eingabe.ganzZahl());
-                this.getPunktzahl();
-                this.gewuerfelteZahlenAusgeben();
-
+                punktzahlSpieler1 = this.getPunktzahl(punktzahlSpieler1);
+                System.out.println("Punktzahl S1: " + punktzahlSpieler1);
+                this.gewuerfelteZahlenAusgeben(b6, b8, punktzahlSpieler1);
         }
 
-        public void getPunktzahl(){
+        public void spieler2(){
+                this.wuerfelMethode(eingabe.ganzZahl());
+                punktzahlSpieler2 = this.getPunktzahl(punktzahlSpieler2);
+
+                this.gewuerfelteZahlenAusgeben(b7, b9, punktzahlSpieler2);
+        }
+
+        public Integer getPunktzahl(int punktzahl){
                 if (gewuerfelteZahl1 == gewuerfelteZahl2){
-                        punktzahlSpieler1 = 0;
+                        punktzahl = 0;
                 } else if(gewuerfelteZahl1 == gewuerfelteZahl3){
-                        punktzahlSpieler1 = 0;
+                        punktzahl = 0;
                 } else if (gewuerfelteZahl2 == gewuerfelteZahl3) {
-                        punktzahlSpieler1 = 0;
+                        punktzahl = 0;
                 } else {
-                        punktzahlSpieler1 = eingabe.ganzZahl();
+                        punktzahl = eingabe.ganzZahl();
                 }
+                System.out.println("Punktzahl: " + punktzahl);
+                return punktzahl;
         }
 
-        public void gewuerfelteZahlenAusgeben(){
-                b8.setzeText(gewuerfelteZahl1 + "; " + Integer.toString(gewuerfelteZahl2) + "; " + Integer.toString(gewuerfelteZahl3));
-                b6.setzeText(Integer.toString(punktzahlSpieler1));
+        public void gewuerfelteZahlenAusgeben(BeschriftungsFeld punktzahlB, BeschriftungsFeld zahlenB, Integer punktzahl){
+                zahlenB.setzeText(gewuerfelteZahl1 + "; " + Integer.toString(gewuerfelteZahl2) + "; " + Integer.toString(gewuerfelteZahl3));
+                punktzahlB.setzeText(Integer.toString(punktzahl));
         }
         public void wuerfelMethode(int anzahlWuerfeln){
+
                 if (anzahlWuerfeln <= 6 && anzahlWuerfeln>0) {
                         switch (anzahlWuerfeln) {
                                 case 1:
@@ -101,6 +123,20 @@ public class Wuerfelspiel {
                         b10.setzeText("");
                 } else {
                         b10.setzeText("Eingabe überprüfen");
+                }
+        }
+
+        public void setNeuesSpiel(){
+
+        }
+
+        public void setSpielerWechseln(){
+                if (spieler1){
+                        spieler1 = false;
+                        spieler2 = true;
+                } else{
+                        spieler2 = false;
+                        spieler1 = true;
                 }
         }
 }
