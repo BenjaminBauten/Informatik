@@ -40,7 +40,10 @@ public class Main {
         //new TaschenrechnerV2();
 
         //Würfelspiel
-        new Wuerfelspiel();
+        //new Wuerfelspiel();
+
+        //Nim-Spiel
+        new NimSpiel();
     }
 
 }

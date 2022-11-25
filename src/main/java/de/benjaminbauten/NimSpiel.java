@@ -1,0 +1,91 @@
+package de.benjaminbauten;
+import basis.*;
+public class NimSpiel {
+
+    private Fenster fenster;
+    private Stift stift;
+    private BeschriftungsFeld b1 ,b2, b3;
+    private Knopf k1, k2, k3;
+
+    private int anzahlHoelzer;
+
+    private boolean spieler1;
+
+
+    public NimSpiel(){
+
+        fenster = new Fenster(600, 400);
+        stift = new Stift();
+
+        //stift.bewegeBis(350, 100);
+        //stift.runter();
+        //stift.zeichneRechteck(200, 200);
+        //stift.hoch();
+
+        spieler1 = true;
+
+        anzahlHoelzer = Hilfe.zufall(10, 20);
+
+        b1 = new BeschriftungsFeld("Spieler 1", 50, 50, 200, 50);
+        b2 = new BeschriftungsFeld(anzahlHoelzer + " Hölzer", 350, 310, 100, 30);
+        b3 = new BeschriftungsFeld("", 250, 360, 200, 30);
+        b3.setzeSchriftFarbe(Farbe.ROT);
+        b3.setzeSchriftGroesse(12);
+
+        k1 = new Knopf("-1", 100, 100, 100, 40);
+        k2 = new Knopf("-2", 100, 150, 100, 40);
+        k3 = new Knopf("-3", 100, 200, 100, 40);
+
+        k1.setzeKnopfLauscher(knopf -> ausfuehren(-1));
+        k2.setzeKnopfLauscher(knopf -> ausfuehren(-2));
+        k3.setzeKnopfLauscher(knopf -> ausfuehren(-3));
+
+
+        this.hoelzerZeichnen();
+    }
+
+    public void ausfuehren(int minusAnzahl){
+
+        anzahlHoelzer += minusAnzahl;
+        fenster.loescheAlles();
+        this.hoelzerZeichnen();
+        b2.setzeText(anzahlHoelzer + " Hölzer");
+
+        this.gewinnerPruefen();
+
+        if (spieler1){
+            b1.setzeText("Spieler 2");
+            spieler1 = false;
+        } else{
+            b1.setzeText("Spieler 1");
+            spieler1 = true;
+        }
+
+    }
+
+    public void hoelzerZeichnen(){
+        stift.bewegeBis(370, 280);
+
+        for (int i = 0; i < anzahlHoelzer; i++) {
+            stift.runter();
+            stift.bewegeUm(160);
+            stift.hoch();
+            stift.dreheUm(180);
+            stift.bewegeUm(160);
+            stift.dreheUm(270);
+            stift.bewegeUm(5);
+            stift.dreheUm(270);
+        }
+    }
+
+    public void gewinnerPruefen(){
+        if (anzahlHoelzer < 1){
+            if (spieler1){
+                b3.setzeText("Spieler 1 hat verloren.");
+            } else{
+                b3.setzeText("Spieler 2 hat verloren.");
+            }
+        }
+    }
+}
+
