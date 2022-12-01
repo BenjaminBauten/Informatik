@@ -5,7 +5,7 @@ public class NimSpiel {
     private Fenster fenster;
     private Stift stift;
     private BeschriftungsFeld b1 ,b2, b3;
-    private Knopf k1, k2, k3;
+    private final Knopf k1, k2, k3;
 
     private int anzahlHoelzer;
 
@@ -17,28 +17,24 @@ public class NimSpiel {
         fenster = new Fenster(600, 400);
         stift = new Stift();
 
-        //stift.bewegeBis(350, 100);
-        //stift.runter();
-        //stift.zeichneRechteck(200, 200);
-        //stift.hoch();
-
         spieler1 = true;
 
         anzahlHoelzer = Hilfe.zufall(10, 20);
 
-        b1 = new BeschriftungsFeld("Spieler 1", 50, 50, 200, 50);
+        b1 = new BeschriftungsFeld("Spieler 1", 100, 50, 200, 50);
+        b1.setzeSchriftGroesse(22);
         b2 = new BeschriftungsFeld(anzahlHoelzer + " Hölzer", 350, 310, 100, 30);
         b3 = new BeschriftungsFeld("", 250, 360, 200, 30);
         b3.setzeSchriftFarbe(Farbe.ROT);
         b3.setzeSchriftGroesse(12);
 
-        k1 = new Knopf("-1", 100, 100, 100, 40);
-        k2 = new Knopf("-2", 100, 150, 100, 40);
-        k3 = new Knopf("-3", 100, 200, 100, 40);
+        k1 = new Knopf("-1", 100, 150, 100, 40);
+        k2 = new Knopf("-2", 100, 200, 100, 40);
+        k3 = new Knopf("-3", 100, 250, 100, 40);
 
-        k1.setzeKnopfLauscher(knopf -> ausfuehren(-1));
-        k2.setzeKnopfLauscher(knopf -> ausfuehren(-2));
-        k3.setzeKnopfLauscher(knopf -> ausfuehren(-3));
+        k1.setzeKnopfLauscher(knopf -> ausfuehren(1));
+        k2.setzeKnopfLauscher(knopf -> ausfuehren(2));
+        k3.setzeKnopfLauscher(knopf -> ausfuehren(3));
 
 
         this.hoelzerZeichnen();
@@ -46,20 +42,22 @@ public class NimSpiel {
 
     public void ausfuehren(int minusAnzahl){
 
-        anzahlHoelzer += minusAnzahl;
+        anzahlHoelzer -= minusAnzahl;
         fenster.loescheAlles();
         this.hoelzerZeichnen();
         b2.setzeText(anzahlHoelzer + " Hölzer");
 
-        this.gewinnerPruefen();
-
         if (spieler1){
             b1.setzeText("Spieler 2");
             spieler1 = false;
-        } else{
+            this.ki();
+        } else {
             b1.setzeText("Spieler 1");
             spieler1 = true;
         }
+
+        this.gewinnerPruefen();
+
 
     }
 
@@ -79,13 +77,37 @@ public class NimSpiel {
     }
 
     public void gewinnerPruefen(){
-        if (anzahlHoelzer < 1){
+        if (anzahlHoelzer == 1){
             if (spieler1){
                 b3.setzeText("Spieler 1 hat verloren.");
             } else{
                 b3.setzeText("Spieler 2 hat verloren.");
             }
         }
+    }
+
+    public void ki(){
+        Hilfe.pause(1000);
+        if (anzahlHoelzer == 4){
+            ausfuehren(3);
+        } else if (anzahlHoelzer == 3){
+            ausfuehren(2);
+        } else if(anzahlHoelzer == 2){
+            ausfuehren(1);
+        } else if (anzahlHoelzer == 5) {
+            ausfuehren(Hilfe.zufall(1,3));
+        } else if (anzahlHoelzer == 6) {
+            ausfuehren(1);
+        } else if (anzahlHoelzer == 7) {
+            ausfuehren(2);
+        } else if (anzahlHoelzer == 1) {
+            ausfuehren(1);
+        } else if (anzahlHoelzer == 8) {
+            ausfuehren(3);
+        } else {
+            ausfuehren(Hilfe.zufall(1,3));
+        }
+
     }
 }
 
