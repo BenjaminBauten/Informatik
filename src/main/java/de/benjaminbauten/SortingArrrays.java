@@ -15,6 +15,7 @@ public class SortingArrrays {
             zahlen[i] = Hilfe.zufall(1, 100);
         }
         stift.dreheUm(90);
+        stift.setzeLinienBreite(2);
         bubbleSort();
     }
     private void bubbleSort(){
@@ -24,9 +25,9 @@ public class SortingArrrays {
                 if (zahlen[i] > zahlen[i+1]){
                     swap(zahlen, i, i+1);
                 }
-                zeichnen();
-                Hilfe.pause(2);
-            } // Ende innere for-Schleife
+            }
+            zeichnen();
+            Hilfe.pause(100);
         }
         System.out.println(Arrays.toString(zahlen));
 
