@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] s) throws IOException {
 
-        //Zeichen-Klasse
+        /*Zeichen-Klasse
         //EKlasse programm = new EKlasse(750,500);
 
         //BilderGalerie
@@ -32,18 +32,22 @@ public class Main {
         //new PaintClassic(500, 500);
         //System.out.println("Hilfe");
 
-        //Zahlenraten
-        //new Zahlenraten();
+        Zahlenraten
+        /new Zahlenraten();
 
-        //Taschenrechner
-        //new Calculator();
-        //new TaschenrechnerV2();
+        Taschenrechner
+        new Calculator();
+        new TaschenrechnerV2();
 
-        //Würfelspiel
-        //new Wuerfelspiel();
+        Würfelspiel
+        new Wuerfelspiel();
 
-        //Nim-Spiel
-        new NimSpiel();
+        Nim-Spiel
+        new NimSpiel();*/
+
+        //Array Test
+        //new ArrayTest();
+        new SortingArrrays();
     }
 
 }
